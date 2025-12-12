@@ -1,0 +1,196 @@
+body {
+  background: linear-gradient(120deg, #f8d3f0, #e6ccff);
+  font-family: 'Roboto', sans-serif;
+  min-height: 100vh;
+}
+
+.welcome-title {
+  font-family: 'Montserrat', 'Baloo Bhaina 2', Arial, sans-serif;
+  font-weight: 900;
+  font-size: 3rem;
+  color: #c058e5;
+  text-shadow: 2px 4px 10px #c7c6f8, 0 3px 7px #a36ed7;
+  letter-spacing: 3px;
+  margin-top: 1.5rem;
+  text-align: center;
+}
+.container-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  margin-top: 2rem;
+}
+.game-panel {
+  background: rgba(255,255,255,0.5);
+  padding: 18px;
+  border-radius: 18px;
+  box-shadow: 0 2px 8px #e9d5fa;
+}
+.game-grid {
+  display: grid;
+  grid-template-rows: repeat(3, 8vw);
+  grid-template-columns: repeat(3, 8vw);
+  gap: 6px;
+  justify-content: center;
+  align-items: center;
+}
+.game-box {
+  border: 2.5px solid #ae6ee5;
+  background: #fff4fd;
+  font-size: 3vw;
+  font-weight: bold;
+  color: #6a1a99;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  transition: background 0.2s;
+  min-height: 55px;
+  min-width: 55px;
+}
+.game-box:hover {
+  background-color: #f2eafc;
+}
+.info-panel {
+  background: rgba(254,239,255,0.7);
+  padding: 24px 20px;
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 210px;
+  font-family: 'Roboto', sans-serif;
+  box-shadow: 0 2px 8px #d8a7e6;
+}
+.info-title {
+  font-size: 1.15rem;
+  font-weight: bold;
+  color: #9616b8;
+  margin-bottom: 4px;
+  text-shadow: 1px 1px 4px #ebe3fd;
+}
+.mode-btns {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+.mode-btns button {
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0.50em 1.2em;
+  border: none;
+  border-radius: 8px;
+  background: #eebffd;
+  color: #7d4196;
+  cursor: pointer;
+  box-shadow: 0 2px 5px #f7e3fb;
+  transition: background 0.2s;
+}
+.mode-btns button.active {
+  background: #9b42ad;
+  color: #fff;
+}
+.difficulty-btns {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin: 8px 0 10px 0;
+}
+.difficulty-title {
+  font-size: 1rem;
+  color: #6844a6;
+  font-weight: bold;
+  margin-right: 4px;
+}
+.difficulty-btns button {
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0.40em 1em;
+  border-radius: 8px;
+  border: none;
+  background: #eebffd;
+  color: #7d4196;
+  box-shadow: 0 2px 5px #f7e3fb;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.difficulty-btns button.active {
+  background: #9b42ad;
+  color: #fff;
+}
+.grid-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 10px;
+  margin-top: 6px;
+}
+.grid-btns .grid-btn {
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0.40em 1em;
+  border-radius: 8px;
+  border: none;
+  background: #eebffd;
+  color: #7d4196;
+  box-shadow: 0 2px 5px #f7e3fb;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.grid-btns .grid-btn.active {
+  background: #9b42ad;
+  color: #fff;
+}
+.scoreboard {
+  margin: 18px 0 0 0;
+  font-size: 1.05rem;
+  color: #7d4196;
+}
+#reset {
+  font-size: 1rem;
+  margin-top: 12px;
+  padding: 0.55em 1.6em;
+  background: #eebffd;
+  color: #7d4196;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px #f7e3fb;
+  transition: background 0.2s;
+}
+#reset:hover {
+  background: #d5b4ff;
+}
+.info {
+  font-size: 1.1rem;
+  color: #6531a4;
+  margin-top: 14px;
+  padding: 4px 0;
+  font-family: 'Baloo Bhaina 2', cursive;
+  text-shadow: 1px 1px 4px #ebe3fd;
+  text-align: center;
+}
+.character {
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+}
+.char-img {
+  width: 100px;
+}
+.speech-bubble {
+  background: white;
+  border: 2px solid #9a49a4;
+  border-radius: 10px;
+  padding: 8px;
+  position: absolute;
+  top: -50px;
+  left: 60px;
+  width: 150px;
+  text-align: center;
+  font-size: 1rem;
+  z-index: 100;
+}
