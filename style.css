@@ -21,32 +21,24 @@ body {
   gap: 40px;
   margin-top: 2rem;
 }
-
-/* Responsive board container */
 .game-panel {
   background: rgba(255,255,255,0.5);
   padding: 18px;
   border-radius: 18px;
   box-shadow: 0 2px 8px #e9d5fa;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
-/* Keep board square, responsive */
 .game-grid {
   display: grid;
-  width: min(84vw, 520px);
-  height: min(84vw, 520px);
-  max-width: 520px;
-  max-height: 520px;
-  gap: 8px;
-  margin: 8px auto;
+  grid-template-rows: repeat(3, 8vw);
+  grid-template-columns: repeat(3, 8vw);
+  gap: 6px;
+  justify-content: center;
+  align-items: center;
 }
-/* Boxes scale with grid */
 .game-box {
   border: 2.5px solid #ae6ee5;
   background: #fff4fd;
-  font-size: clamp(20px, 4.8vw, 48px);
+  font-size: 3vw;
   font-weight: bold;
   color: #6a1a99;
   cursor: pointer;
@@ -54,24 +46,10 @@ body {
   justify-content: center;
   align-items: center;
   border-radius: 10px;
-  transition: transform 0.12s ease, background 0.18s ease, box-shadow 0.18s ease;
-  min-height: 48px;
-  min-width: 48px;
+  transition: background 0.2s;
+  min-height: 55px;
+  min-width: 55px;
 }
-
-/* Touch feedback */
-.game-box:active {
-  transform: scale(0.94);
-}
-
-/* Hover for pointer-capable devices */
-@media (hover: hover) and (pointer: fine) {
-  .game-box:hover { 
-    background-color: #f2eafc; 
-    box-shadow: 0 6px 16px rgba(160,98,200,0.08);
-  }
-}
-
 .game-box:hover {
   background-color: #f2eafc;
 }
@@ -216,3 +194,22 @@ body {
   font-size: 1rem;
   z-index: 100;
 }
+
+/* ===========================
+   WINNING HIGHLIGHT EFFECT
+   =========================== */
+.winning-cell {
+  background: #ffeaa7 !important;
+  box-shadow: 0 0 12px rgba(255, 200, 0, 0.7);
+  animation: winPulse 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes winPulse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05);
+  }
+}
+
