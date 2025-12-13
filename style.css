@@ -15,13 +15,33 @@ body {
   text-align: center;
 }
 
+/* Mobile typography */
+@media (max-width: 600px) {
+  .welcome-title {
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+  }
+}
+
+
 .container-wrapper {
   display: flex;
   justify-content: center;
   align-items: flex-start;
   gap: 40px;
   margin-top: 2rem;
+  padding: 0 16px;
 }
+
+/* Mobile layout */
+@media (max-width: 900px) {
+  .container-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+}
+
 
 /* Responsive board container */
 .game-panel {
@@ -91,6 +111,21 @@ body {
   font-family: 'Roboto', sans-serif;
   box-shadow: 0 2px 8px #d8a7e6;
 }
+
+@media (max-width: 900px) {
+  .info-panel {
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+  }
+
+  .grid-btns {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
 
 .info-title {
   font-size: 1.15rem;
