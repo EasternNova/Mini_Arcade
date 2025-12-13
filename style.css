@@ -1,9 +1,12 @@
+/*Global base styles*/
 body {
   background: linear-gradient(120deg, #f8d3f0, #e6ccff);
   font-family: 'Roboto', sans-serif;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
+/*Page Titele style*/
 .welcome-title {
   font-family: 'Montserrat', 'Baloo Bhaina 2', Arial, sans-serif;
   font-weight: 900;
@@ -15,15 +18,7 @@ body {
   text-align: center;
 }
 
-/* Mobile typography */
-@media (max-width: 600px) {
-  .welcome-title {
-    font-size: 2.2rem;
-    letter-spacing: 1px;
-  }
-}
-
-
+/* Container wrapper for game and info panel: Main Layout wrapper */
 .container-wrapper {
   display: flex;
   justify-content: center;
@@ -33,17 +28,7 @@ body {
   padding: 0 16px;
 }
 
-/* Mobile layout */
-@media (max-width: 900px) {
-  .container-wrapper {
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
-  }
-}
-
-
-/* Responsive board container */
+/* Game Board panel*/
 .game-panel {
   background: rgba(255, 255, 255, 0.5);
   padding: 18px;
@@ -54,32 +39,28 @@ body {
   align-items: center;
 }
 
-/* Keep board square, responsive */
+/* Square grid container*/
 .game-grid {
   display: grid;
-  width: min(84vw, 520px);
-  height: min(84vw, 520px);
-  max-width: 520px;
-  max-height: 520px;
-  gap: 8px;
+  width: min(88vw, 520px);
+  aspect-ratio: 1 / 1;
+  gap: 6px;
   margin: 8px auto;
+  box-sizing: border-box;
 }
 
-/* Boxes scale with grid */
+/* Grid cells: Boxes scale with grid */
 .game-box {
   border: 2.5px solid #ae6ee5;
   background: #fff4fd;
-  font-size: clamp(20px, 4.8vw, 48px);
+  font-size: clamp(16px, 4vw, 42px);
   font-weight: bold;
   color: #6a1a99;
-  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 10px;
   transition: transform 0.12s ease, background 0.18s ease, box-shadow 0.18s ease;
-  min-height: 48px;
-  min-width: 48px;
 }
 
 /* Touch feedback */
@@ -88,18 +69,12 @@ body {
 }
 
 /* Hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  .game-box:hover {
-    background-color: #f2eafc;
-    box-shadow: 0 6px 16px rgba(160, 98, 200, 0.08);
-  }
-}
-
-
 .game-box:hover {
   background-color: #f2eafc;
+  box-shadow: 0 6px 16px rgba(160, 98, 200, 0.08);
 }
 
+/* Info Panel styles*/
 .info-panel {
   background: rgba(254, 239, 255, 0.7);
   padding: 24px 20px;
@@ -112,21 +87,6 @@ body {
   box-shadow: 0 2px 8px #d8a7e6;
 }
 
-@media (max-width: 900px) {
-  .info-panel {
-    width: 100%;
-    max-width: 420px;
-    text-align: center;
-  }
-
-  .grid-btns {
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-}
-
-
 .info-title {
   font-size: 1.15rem;
   font-weight: bold;
@@ -135,16 +95,12 @@ body {
   text-shadow: 1px 1px 4px #ebe3fd;
 }
 
-.mode-btns {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 8px;
-}
-
+/* Info Panel Buttons and Scoreboard*/
+/* Mode buttons */
 .mode-btns button {
   font-size: 1rem;
   font-weight: bold;
-  padding: 0.50em 1.2em;
+  padding: 0.5em 1.2em;
   border: none;
   border-radius: 8px;
   background: #eebffd;
@@ -159,24 +115,11 @@ body {
   color: #fff;
 }
 
-.difficulty-btns {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  margin: 8px 0 10px 0;
-}
-
-.difficulty-title {
-  font-size: 1rem;
-  color: #6844a6;
-  font-weight: bold;
-  margin-right: 4px;
-}
-
+/* Difficulty buttons */
 .difficulty-btns button {
   font-size: 1rem;
   font-weight: bold;
-  padding: 0.40em 1em;
+  padding: 0.4em 1em;
   border-radius: 8px;
   border: none;
   background: #eebffd;
@@ -191,18 +134,11 @@ body {
   color: #fff;
 }
 
-.grid-btns {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 10px;
-  margin-top: 6px;
-}
-
+/* Grid size buttons */
 .grid-btns .grid-btn {
   font-size: 1rem;
   font-weight: bold;
-  padding: 0.40em 1em;
+  padding: 0.4em 1em;
   border-radius: 8px;
   border: none;
   background: #eebffd;
@@ -217,15 +153,9 @@ body {
   color: #fff;
 }
 
-.scoreboard {
-  margin: 18px 0 0 0;
-  font-size: 1.05rem;
-  color: #7d4196;
-}
-
+/* Reset button */
 #reset {
   font-size: 1rem;
-  margin-top: 12px;
   padding: 0.55em 1.6em;
   background: #eebffd;
   color: #7d4196;
@@ -234,23 +164,9 @@ body {
   border-radius: 8px;
   cursor: pointer;
   box-shadow: 0 2px 5px #f7e3fb;
-  transition: background 0.2s;
 }
 
-#reset:hover {
-  background: #d5b4ff;
-}
-
-.info {
-  font-size: 1.1rem;
-  color: #6531a4;
-  margin-top: 14px;
-  padding: 4px 0;
-  font-family: 'Baloo Bhaina 2', cursive;
-  text-shadow: 1px 1px 4px #ebe3fd;
-  text-align: center;
-}
-
+/* Character*/
 .character {
   position: absolute;
   bottom: 10px;
@@ -262,22 +178,18 @@ body {
 }
 
 .speech-bubble {
+  position: absolute;
+  top: -50px;
+  left: 60px;
   background: white;
   border: 2px solid #9a49a4;
   border-radius: 10px;
   padding: 8px;
-  position: absolute;
-  top: -50px;
-  left: 60px;
   width: 150px;
-  text-align: center;
   font-size: 1rem;
-  z-index: 100;
 }
 
-/* ===========================
-   WINNING HIGHLIGHT EFFECT
-   =========================== */
+/* Winning animation */
 .winning-cell {
   background: #ffeaa7 !important;
   box-shadow: 0 0 12px rgba(255, 200, 0, 0.7);

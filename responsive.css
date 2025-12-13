@@ -1,0 +1,64 @@
+/* Mobile title scaling */
+@media (max-width: 600px) {
+  .welcome-title {
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+  }
+}
+
+/* Stack layout on mobile */
+@media (max-width: 900px) {
+  .container-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .game-panel {
+    order: 1;
+  }
+
+  .character {
+    order: 2;
+    position: relative;
+    bottom: auto;
+    left: auto;
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+  }
+
+  .info-panel {
+    order: 3;
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+  }
+
+  .grid-btns {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+/* Character scaling on mobile */
+@media (max-width: 900px) {
+  .char-img {
+    width: 80px;
+  }
+
+  .speech-bubble {
+    position: relative;
+    top: auto;
+    left: auto;
+    margin-left: 8px;
+  }
+}
+
+/* Desktop-only hover enhancements */
+@media (hover: hover) and (pointer: fine) {
+  .game-box:hover {
+    box-shadow: 0 6px 16px rgba(160, 98, 200, 0.08);
+  }
+}
