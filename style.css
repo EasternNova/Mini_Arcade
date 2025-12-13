@@ -239,3 +239,22 @@ body {
   font-size: 1rem;
   z-index: 100;
 }
+
+/* ===========================
+   WINNING HIGHLIGHT EFFECT
+   =========================== */
+.winning-cell {
+  background: #ffeaa7 !important;
+  box-shadow: 0 0 12px rgba(255, 200, 0, 0.7);
+  animation: winPulse 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes winPulse {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.05);
+  }
+}
