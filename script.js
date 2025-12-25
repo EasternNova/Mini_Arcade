@@ -23,7 +23,7 @@ function initBoard(size) {
   let gridStr = "";
   gameGrid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
   gameGrid.style.gridTemplateRows = `repeat(${size}, 1fr)`;
-  for(let i=0; i<size*size; i++) {
+  for (let i = 0; i < size * size; i++) {
     gridStr += `<div class='game-box' data-idx='${i}'></div>`;
   }
   gameGrid.innerHTML = gridStr;
@@ -34,27 +34,40 @@ function initBoard(size) {
 
 function handleCellClick(e) {
   const idx = parseInt(e.target.getAttribute('data-idx'));
-  if(board[idx] === "" && !isGameOver) {
-    board[idx] = turn;
-    e.target.textContent = turn;
-    if(checkWin(board, currentSize, turn)) {
-      infoText.textContent = `${turn} Won!`;
-      isGameOver = true;
-      if(turn === "X") xScore++; else oScore++;
-      xScoreSpan.textContent = xScore;
-      oScoreSpan.textContent = oScore;
-    } else if(board.every(cell => cell !== "")) {
-      infoText.textContent = "Draw!";
-      isGameOver = true;
-    } else {
-      turn = turn === "X" ? "O" : "X";
-      infoText.textContent = `Turn for ${turn}`;
-      if(isSinglePlayer && turn === "O" && !isGameOver) {
-        setTimeout(aiMove, 600);
-      }
-    }
+  if (board[idx] !== "" || isGameOver) return;
+
+  board[idx] = turn;
+  e.target.textContent = turn;
+
+  const winIndices = checkWin(board, currentSize, turn);
+  if (winIndices) {
+    infoText.textContent = `${turn} Won!`;
+    isGameOver = true;
+
+    winIndices.forEach(i => {
+      document.querySelector(`[data-idx='${i}']`).classList.add('winning-cell');
+    });
+
+    if (turn === "X") xScore++; else oScore++;
+    xScoreSpan.textContent = xScore;
+    oScoreSpan.textContent = oScore;
+    return;
+  }
+
+  if (board.every(cell => cell !== "")) {
+    infoText.textContent = "Draw!";
+    isGameOver = true;
+    return;
+  }
+
+  turn = turn === "X" ? "O" : "X";
+  infoText.textContent = `Turn for ${turn}`;
+
+  if (isSinglePlayer && turn === "O") {
+    setTimeout(aiMove, 600);
   }
 }
+
 
 easyBtn.onclick = () => {
   aiLevel = "easy";
@@ -117,62 +130,67 @@ function postAIMove() {
 
 function checkWin(b, size, player) {
   const countToWin = size === 3 ? 3 : 4;
-  // Rows
-  for(let r=0; r<size; r++) {
-    for(let c=0; c<=size-countToWin; c++) {
-      let win = true;
-      for(let k=0; k<countToWin; k++) {
-        if(b[r*size+c+k]!==player) win = false;
+  const wins = [];
+   // Rows
+  for (let r = 0; r < size; r++) {
+      for (let c = 0; c <= size - countToWin; c++) {
+        let line = [];
+        for (let k = 0; k < countToWin; k++) {
+          const idx = r * size + c + k;
+          if (b[idx] === player) line.push(idx);
+        }
+        if (line.length === countToWin) return line;
       }
-      if(win) return true;
     }
-  }
   // Columns
-  for(let c=0; c<size; c++) {
-    for(let r=0; r<=size-countToWin; r++) {
-      let win = true;
-      for(let k=0; k<countToWin; k++) {
-        if(b[(r+k)*size+c]!==player) win = false;
+    for (let c = 0; c < size; c++) {
+    for (let r = 0; r <= size - countToWin; r++) {
+      let line = [];
+      for (let k = 0; k < countToWin; k++) {
+        const idx = (r + k) * size + c;
+        if (b[idx] === player) line.push(idx);
       }
-      if(win) return true;
+      if (line.length === countToWin) return line;
     }
   }
   // Diagonals left-right
-  for(let r=0; r<=size-countToWin; r++) {
-    for(let c=0; c<=size-countToWin; c++) {
-      let win = true;
-      for(let k=0; k<countToWin; k++) {
-        if(b[(r+k)*size+(c+k)]!==player) win = false;
+  for (let r = 0; r <= size - countToWin; r++) {
+    for (let c = 0; c <= size - countToWin; c++) {
+      let line = [];
+      for (let k = 0; k < countToWin; k++) {
+        const idx = (r + k) * size + (c + k);
+        if (b[idx] === player) line.push(idx);
       }
-      if(win) return true;
+      if (line.length === countToWin) return line;
     }
   }
   // Diagonals right-left
-  for(let r=0; r<=size-countToWin; r++) {
-    for(let c=countToWin-1; c<size; c++) {
-      let win = true;
-      for(let k=0; k<countToWin; k++) {
-        if(b[(r+k)*size+(c-k)]!==player) win = false;
+  for (let r = 0; r <= size - countToWin; r++) {
+    for (let c = countToWin - 1; c < size; c++) {
+      let line = [];
+      for (let k = 0; k < countToWin; k++) {
+        const idx = (r + k) * size + (c - k);
+        if (b[idx] === player) line.push(idx);
       }
-      if(win) return true;
+      if (line.length === countToWin) return line;
     }
   }
-  return false;
+  return null;
 }
 
 // Only for hard AI, 3x3 grid
 function minimax(b, player) {
   const winner = getWinner(b, 3);
-  if(winner === "O") return {score: 10, move: null};
-  if(winner === "X") return {score: -10, move: null};
-  if(b.every(cell => cell !== "")) return {score: 0, move: null};
+  if (winner === "O") return { score: 10, move: null };
+  if (winner === "X") return { score: -10, move: null };
+  if (b.every(cell => cell !== "")) return { score: 0, move: null };
 
   let moves = [];
-  for(let i=0;i<9;i++) {
-    if(b[i] === "") {
+  for (let i = 0; i < 9; i++) {
+    if (b[i] === "") {
       b[i] = player;
       let result;
-      if(player === "O") {
+      if (player === "O") {
         result = minimax(b, "X");
       } else {
         result = minimax(b, "O");
@@ -185,14 +203,14 @@ function minimax(b, player) {
     }
   }
   let bestMove;
-  if(player === "O") {
+  if (player === "O") {
     let maxScore = -Infinity;
-    moves.forEach(m => { if(m.score > maxScore) {bestMove = m; maxScore = m.score;} });
+    moves.forEach(m => { if (m.score > maxScore) { bestMove = m; maxScore = m.score; } });
   } else {
     let minScore = Infinity;
-    moves.forEach(m => { if(m.score < minScore) {bestMove = m; minScore = m.score;} });
+    moves.forEach(m => { if (m.score < minScore) { bestMove = m; minScore = m.score; } });
   }
-  return {score: bestMove.score, move: bestMove.idx};
+  return { score: bestMove.score, move: bestMove.idx };
 }
 
 // For 5x5 and 7x7 hard AI with alpha-beta pruning
@@ -248,12 +266,12 @@ function minimaxAB(b, player, alpha, beta, depth) {
 function getWinner(b, size) {
   // 3x3 only
   const wins = [
-    [0,1,2],[3,4,5],[6,7,8], // rows
-    [0,3,6],[1,4,7],[2,5,8], // cols
-    [0,4,8],[2,4,6]          // diags
+    [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
+    [0, 3, 6], [1, 4, 7], [2, 5, 8], // cols
+    [0, 4, 8], [2, 4, 6]          // diags
   ];
-  for(let win of wins) {
-    if(b[win[0]]&&b[win[0]]===b[win[1]]&&b[win[1]]===b[win[2]]) {
+  for (let win of wins) {
+    if (b[win[0]] && b[win[0]] === b[win[1]] && b[win[1]] === b[win[2]]) {
       return b[win[0]];
     }
   }
@@ -262,16 +280,16 @@ function getWinner(b, size) {
 
 function setMode(single) {
   isSinglePlayer = single;
-  modeBtns.forEach(btn=>btn.classList.remove('active'));
-  if(single) modeBtns[0].classList.add('active');
+  modeBtns.forEach(btn => btn.classList.remove('active'));
+  if (single) modeBtns[0].classList.add('active');
   else modeBtns[1].classList.add('active');
   resetGame();
 }
 function setGridSize(size) {
   currentSize = size;
-  gridBtns.forEach(btn=>btn.classList.remove('active'));
-  gridBtns.forEach(btn=>{
-    if(parseInt(btn.getAttribute('data-size'))===size) btn.classList.add('active');
+  gridBtns.forEach(btn => btn.classList.remove('active'));
+  gridBtns.forEach(btn => {
+    if (parseInt(btn.getAttribute('data-size')) === size) btn.classList.add('active');
   })
   resetGame();
 }
@@ -281,11 +299,12 @@ function resetGame() {
   infoText.textContent = "Turn for X";
   initBoard(currentSize);
 }
+
 resetBtn.onclick = resetGame;
-modeBtns[0].onclick = ()=>setMode(true);
-modeBtns[1].onclick = ()=>setMode(false);
-gridBtns.forEach(btn=>{
-  btn.onclick = ()=>setGridSize(parseInt(btn.getAttribute('data-size')));
+modeBtns[0].onclick = () => setMode(true);
+modeBtns[1].onclick = () => setMode(false);
+gridBtns.forEach(btn => {
+  btn.onclick = () => setGridSize(parseInt(btn.getAttribute('data-size')));
 });
 // Character speech
 const speeches = [
@@ -302,3 +321,75 @@ function randomSpeech() {
 setInterval(randomSpeech, 6000);
 // Initialize
 initBoard(currentSize);
+
+new LavenderParticles();
+
+// Theme switcher toggle (UI only for now)
+const themeSwitcher = document.getElementById('themeSwitcher');
+const themeToggleBtn = themeSwitcher.querySelector('.theme-toggle');
+
+themeToggleBtn.addEventListener('click', () => {
+  const isOpen = themeSwitcher.classList.toggle('open');
+  themeToggleBtn.setAttribute('aria-expanded', isOpen);
+});
+
+const DEFAULT_THEME = 'lavender';
+
+function applyTheme(theme) {
+  document.body.classList.remove(
+    'theme-lavender',
+    'theme-yellow',
+    'theme-stars',
+    'theme-waves'
+  );
+  document.body.classList.add(`theme-${theme}`);
+
+// Cleanup lavender particles if switching away
+  if (lavenderInstance) {
+    lavenderInstance = null;
+  }
+
+  // Start lavender particles only for lavender theme
+  if (theme === 'lavender') {
+    lavenderInstance = new LavenderParticles();
+  }
+
+  // Generate stars only for stars theme
+  if (theme === 'stars') {
+    generateParallaxStars();
+  }
+}
+
+applyTheme(DEFAULT_THEME);
+const themeButtons = document.querySelectorAll('.theme-option');
+
+themeButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const selectedTheme = button.getAttribute('data-theme');
+    applyTheme(selectedTheme);
+  });
+});
+
+/* ===============================
+   PARALLAX STARS GENERATOR
+================================ */
+function generateParallaxStars() {
+  const stars1 = [];
+  const stars2 = [];
+  const stars3 = [];
+
+  for (let i = 0; i < 500; i++) {
+    stars1.push(`${Math.random() * 2000}px ${Math.random() * 2000}px #FFF`);
+  }
+  for (let i = 0; i < 200; i++) {
+    stars2.push(`${Math.random() * 2000}px ${Math.random() * 2000}px #FFF`);
+  }
+  for (let i = 0; i < 100; i++) {
+    stars3.push(`${Math.random() * 2000}px ${Math.random() * 2000}px #FFF`);
+  }
+
+  document.documentElement.style.setProperty('--stars1-shadow', stars1.join(','));
+  document.documentElement.style.setProperty('--stars2-shadow', stars2.join(','));
+  document.documentElement.style.setProperty('--stars3-shadow', stars3.join(','));
+}
+

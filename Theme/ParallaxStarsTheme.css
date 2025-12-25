@@ -1,0 +1,79 @@
+/* ===============================
+   PARALLAX STARS THEME
+================================ */
+
+body.theme-stars {
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%) !important;
+}
+
+body.theme-stars .welcome-title {
+  color: #ffffff;
+  text-shadow: 2px 4px 10px #fffbfb;
+}
+
+/* Stars container */
+#stars-theme {
+  position: fixed;
+  inset: 0;
+  z-index: -1;        /* behind the game */
+  pointer-events: none;
+  overflow: hidden;
+  display: none;     /* hidden by default */
+}
+
+/* Visible only in stars theme */
+body.theme-stars #stars-theme {
+  display: block;
+}
+
+/* Star layers */
+#stars,
+#stars2,
+#stars3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent;
+}
+
+/* Animation */
+@keyframes animStar {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-2000px); }
+}
+
+/* Layer 1 */
+#stars {
+  width: 1px;
+  height: 1px;
+  box-shadow: var(--stars1-shadow);
+  animation: animStar 50s linear infinite;
+}
+
+/* Layer 2 */
+#stars2 {
+  width: 2px;
+  height: 2px;
+  box-shadow: var(--stars2-shadow);
+  animation: animStar 100s linear infinite;
+}
+
+/* Layer 3 */
+#stars3 {
+  width: 3px;
+  height: 3px;
+  box-shadow: var(--stars3-shadow);
+  animation: animStar 150s linear infinite;
+}
+
+/* Seamless looping */
+#stars::after,
+#stars2::after,
+#stars3::after {
+  content: "";
+  position: absolute;
+  top: 2000px;
+  width: inherit;
+  height: inherit;
+  box-shadow: inherit;
+}

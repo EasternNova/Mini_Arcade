@@ -1,30 +1,39 @@
 /*Global base styles*/
 body {
-  background: linear-gradient(120deg, #f8d3f0, #e6ccff);
+  margin: 0;
   font-family: 'Roboto', sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /*Page Titele style*/
 .welcome-title {
+  position: relative;
+  z-index: 2;
   font-family: 'Montserrat', 'Baloo Bhaina 2', Arial, sans-serif;
   font-weight: 900;
   font-size: 3rem;
-  color: #c058e5;
-  text-shadow: 2px 4px 10px #c7c6f8, 0 3px 7px #a36ed7;
+  color: inherit;
+  text-shadow: inherit;
   letter-spacing: 3px;
   margin-top: 1.5rem;
   text-align: center;
+
+  margin: 0.5rem 0;
 }
 
 /* Container wrapper for game and info panel: Main Layout wrapper */
 .container-wrapper {
+  position: relative;
+  z-index: 2;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   gap: 40px;
-  margin-top: 2rem;
   padding: 0 16px;
 }
 
@@ -166,11 +175,79 @@ body {
   box-shadow: 0 2px 5px #f7e3fb;
 }
 
+/*Theme Switcher*/
+
+.theme-switcher {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Main toggle button */
+.theme-toggle {
+  font-size: 1rem;
+  padding: 0.5em 1.4em;
+  background: #f3d9ff;
+  color: #6b2c91;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px #ead6f7;
+}
+
+/* Options container */
+.theme-options {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition:
+    max-height 0.35s ease,
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+/* Expanded state */
+.theme-switcher.open .theme-options {
+  max-height: 300px; /* safely larger than content */
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Individual theme buttons */
+.theme-option {
+  font-size: 0.95rem;
+  padding: 0.45em 1.2em;
+  border-radius: 8px;
+  border: none;
+  background: #eebffd;
+  color: #7d4196;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 5px #f7e3fb;
+  transition: background 0.2s, transform 0.12s;
+}
+
+.theme-option:hover {
+  background: #dba7f0;
+}
+
+.theme-option:active {
+  transform: scale(0.96);
+}
+
+
 /* Character*/
 .character {
   position: absolute;
   bottom: 10px;
   left: 20px;
+  z-index: 3;
 }
 
 .char-img {
@@ -191,10 +268,15 @@ body {
 
 /* Winning animation */
 .winning-cell {
-  background: #ffeaa7 !important;
-  box-shadow: 0 0 12px rgba(255, 200, 0, 0.7);
+  background: #ffe066 !important;
+  box-shadow:
+    0 0 12px rgba(255, 200, 0, 0.9),
+    0 0 24px rgba(255, 220, 120, 0.8) !important;
   animation: winPulse 0.6s ease-in-out infinite alternate;
+  position: relative;
+  z-index: 3;
 }
+
 
 @keyframes winPulse {
   from {

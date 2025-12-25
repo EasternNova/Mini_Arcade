@@ -5,46 +5,106 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tic Tac Toe Advanced</title>
+  <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="Theme/LavenderTheme.css">
+  <link rel="stylesheet" href="Theme/CheeseTheme.css">
+  <link rel="stylesheet" href="Theme/ParallaxStarsTheme.css">
+  <link rel="stylesheet" href="Theme/BlueWavesTheme.css">
   <link rel="stylesheet" href="responsive.css">
+  <link rel="image"
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
 </head>
 
+
 <body>
+
+  <div id="stars-theme">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>
+  </div>
+
+  <div id="container">
+  <div id="container-inside">
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+  </div>
+</div>
+
+  <div id="lavender-theme">
+    <canvas id="lavender-canvas"></canvas>
+  </div>
+
   <h1 class="welcome-title">Welcome to the Tic Tac Toe Game</h1>
+
   <div class="container-wrapper">
     <div class="game-panel">
       <div class="game-grid" id="gameGrid"></div>
     </div>
+
     <div class="info-panel">
       <div class="info-title">Choose your mode</div>
+
+      <div class="theme-switcher" id="themeSwitcher">
+      <button class="theme-toggle" aria-expanded="false">
+        Theme
+      </button>
+      <div class="theme-options">
+        <button class="theme-option" data-theme="lavender">Lavender</button>
+        <button class="theme-option" data-theme="yellow">Liquid Cheese</button>
+        <button class="theme-option" data-theme="stars">Parallax Stars</button>
+        <button class="theme-option" data-theme="waves">Blue Waves</button>
+      </div>
+    </div>
+
       <div class="mode-btns">
         <button id="one-player" class="active">1 Player</button>
         <button id="two-player">2 Player</button>
       </div>
+
       <div class="difficulty-btns">
         <span class="difficulty-title">AI Level:</span>
         <button id="easy-ai" class="active">Easy</button>
         <button id="hard-ai">Hard</button>
       </div>
+
       <div class="grid-btns">
         <button class="grid-btn active" data-size="3">3 x 3</button>
         <button class="grid-btn" data-size="5">5 x 5</button>
         <button class="grid-btn" data-size="7">7 x 7</button>
       </div>
+
       <div class="scoreboard">
         <div>X Score: <span id="x-score">0</span></div>
         <div>O Score: <span id="o-score">0</span></div>
       </div>
+
       <button id="reset">Reset</button>
       <div class="info" id="infoText">Turn for X</div>
     </div>
+
   </div>
+
   <div class="character">
     <img src="character.png" class="char-img" alt="Character">
     <div class="speech-bubble" id="speech">Let's play!</div>
   </div>
-  <script src="script.js"></script>
+  
+<script src="Theme/lavenderParticles.js"></script>
+<script src="Theme/ParallaxStar.js"></script>
+<script src="script.js"></script>
+
 </body>
 
 </html>

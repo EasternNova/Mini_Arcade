@@ -1,0 +1,50 @@
+body.theme-yellow {
+  background-image: url('CheeseTheme.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  --theme-text-color: #5a3b00;
+
+  --panel-bg: rgba(255,248,220,0.8);
+  --panel-shadow: rgba(255, 180, 0, 0.35);
+  --panel-padding: 20px 24px;
+  --panel-title-color: #6b3f00;
+  --panel-title-shadow:
+    0 2px 6px rgba(255, 200, 0, 0.6),
+    0 6px 18px rgba(255, 180, 0, 0.45);
+
+  --grid-border: #ffd966;
+  --grid-bg: rgba(255, 255, 224, 0.8);
+  --grid-shadow: 0 4px 12px rgba(255, 200, 0, 0.25);
+  --grid-text-color: #92400e; 
+  --grid-hover-bg: rgba(255, 255, 224, 0.95);
+  --grid-hover-shadow: 0 6px 16px rgba(255, 200, 0, 0.35);
+
+  --btn-bg: #ffe066;
+  --btn-text: #92400e;
+  --btn-shadow: 0 4px 10px rgba(255, 180, 0, 0.35);
+  --btn-active-bg: #f59e0b;
+  --btn-active-shadow: 0 2px 6px rgba(255, 140, 0, 0.25);
+  
+  --focus-ring: #f59e0b;
+
+  --bubble-bg: rgba(255, 250, 220, 0.95);
+  --bubble-border: #f57c0b;
+  --bubble-text: #5a3b00;
+
+  --win-bg: #fff1a8;
+  --win-glow:
+    0 0 12px rgba(255, 200, 0, 0.9),
+    0 0 24px rgba(255, 220, 120, 0.8);  
+}
+
+
+body.theme-yellow .welcome-title {
+  color: #6b3f00;
+  text-shadow:
+    0 2px 6px rgba(255, 200, 0, 0.6),
+    0 6px 18px rgba(255, 180, 0, 0.45);
+}
+/* Theme selector buttons should inherit colors accordingly */

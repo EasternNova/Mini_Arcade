@@ -1,0 +1,86 @@
+/* Blue Waves theme root */
+body.theme-waves {
+  --theme-text-color: #e0f2fe;
+  background:
+    radial-gradient(120% 50% at 50% -20%, rgba(255,255,255,0.25), transparent 60%),
+    linear-gradient(180deg, #38bdf8 0%, #0ea5e9 35%, #0284c7 70%, #0369a1 100%);
+}
+
+/* Title */
+body.theme-waves .welcome-title {
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+/* Panels */
+body.theme-waves .game-panel,
+body.theme-waves .info-panel {
+  background: rgba(255,255,255,0.85);
+  box-shadow: 0 8px 20px rgba(2,132,199,0.35);
+}
+
+/* Hide waves by default */
+#container {
+  display: none;
+}
+
+/* Enable waves only for waves theme */
+body.theme-waves #container {
+  display: block;
+  position: absolute; /* NOT fixed */
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background: linear-gradient(135deg, #00adef 0%, #0076e5 100%);
+}
+
+/* Inner wave layer */
+body.theme-waves #container-inside {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Wave circles */
+body.theme-waves .circle {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: calc(15vw + var(--i) * 10vw);
+  height: calc(15vw + var(--i) * 10vw);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #e7f9ffdf;
+  opacity: max(0.05, calc(0.45 - var(--i) * 0.03));
+  animation: circle-scale 3s cubic-bezier(0.6,0,0.4,1) infinite alternate;
+  animation-delay: calc(var(--i) * 0.15s);
+}
+
+/* Circle index */
+body.theme-waves .circle:nth-child(1){--i:0;}
+body.theme-waves .circle:nth-child(2){--i:1;}
+body.theme-waves .circle:nth-child(3){--i:2;}
+body.theme-waves .circle:nth-child(4){--i:3;}
+body.theme-waves .circle:nth-child(5){--i:4;}
+body.theme-waves .circle:nth-child(6){--i:5;}
+body.theme-waves .circle:nth-child(7){--i:6;}
+body.theme-waves .circle:nth-child(8){--i:7;}
+body.theme-waves .circle:nth-child(9){--i:8;}
+body.theme-waves .circle:nth-child(10){--i:9;}
+body.theme-waves .circle:nth-child(11){--i:10;}
+body.theme-waves .circle:nth-child(12){--i:11;}
+
+/* Animation */
+@keyframes circle-scale {
+  from { transform: translate(-50%,-50%) scale(1); }
+  to   { transform: translate(-50%,-50%) scale(1.1); }
+}
+
+/* Mobile adjustment */
+@media (max-width: 480px) {
+  body.theme-waves .circle {
+    width: calc(25vw + var(--i) * 12vw);
+    height: calc(25vw + var(--i) * 12vw);
+  }
+}
