@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Candy Crush with Larry 🍬</title>
+  <link rel="icon" href="images/larry_candy_master.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <h1 class="gameTitle">Candy Crush with Larry 🍬</h1>
+  <div class="container">
+    <div class="sidebar" id="modeSelection">
+  <h2>Choose Game Mode</h2>
+  <button id="endlessMode">Endless Mode</button>
+  <button id="timedMode">Timed Mode</button>
+  <button id="resumeBtn" style="display:none;">Resume Saved Game</button>
+
+  <div class="scoreBlock">
+    <h3>Score</h3>
+    <div>High Score: <span id="highScore">0</span></div>
+    <div>Your Score: <span id="score">0</span></div>
+    <div id="timer" style="margin-top:10px; font-weight:600;"></div>
+  </div>
+
+  <!-- 👇 Larry section (side by side layout) -->
+  <div id="larry">
+    <div id="larrySpeech">Hi there! Ready to play?</div>
+    <img id="larryImg" src="images/larry.png" alt="Larry the Candy Master">
+  </div>
+</div>
+
+    <div class="gameArea">
+      <div class="grid"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  background: linear-gradient(to right, #ffd89b, #19547b);
+  color: #333;
+  transition: background 0.3s, color 0.3s;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  background: #222;
+  color: white;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 1rem;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+nav a:hover,
+.play-btn:hover {
+  color: #ffd89b;
+}
+
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.game-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.game-card:hover {
+  transform: scale(1.05);
+}
+
+.play-btn {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: #19547b;
+  color: white;
+  border-radius: 4px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.dark {
+  background: #121212;
+  color: #e1e1e1;
+}
+
+.dark header {
+  background: #1e1e1e;
+}
+
+.dark .game-card {
+  background: #222;
+  box-shadow: none;
+}
+

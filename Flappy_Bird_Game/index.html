@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flappy Bird Advanced</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="images/icon.png" type="image/png">
+</head>
+<body class="day">
+  <!-- Header with title -->
+  <div class="game-header">
+    <h1 class="game-title">Flappy Bird Game</h1>
+  </div>
+
+  <!-- Main wrapper: Mascot + Game -->
+  <div class="main-wrapper">
+    <!-- Mascot (Skyler) -->
+    <div class="mascot-wrapper">
+      <div class="bird-container">
+        <img src="images/Bird_Master.png" alt="Bird Master" class="bird mascot">
+        <div class="speech-bubble" id="speechBubble">Let's fly high!</div>
+      </div>
+    </div>
+
+    <!-- Game canvas -->
+    <div class="game-container">
+      <canvas id="gameCanvas"></canvas>
+      <div id="overlay" class="overlay">
+        <h1>Tap or Press to Start</h1>
+        <p>Click 🌙 or ☀️ to change theme</p>
+      </div>
+      <button id="themeToggle">🌙</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

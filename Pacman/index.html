@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pac-Man</title>
+  <link rel="icon" href="images/icon.png" type="image/png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <header>
+    <h1>Welcome to the Pac-Man Game</h1>
+  </header>
+
+  <div class="layout">
+    <div class="game-box">
+      <canvas id="gameCanvas"></canvas>
+    </div>
+
+    <aside class="info-box" id="infoBox">
+      <div class="game-title">Pac-Man</div>
+
+      <div class="score-panel">
+        <div class="score-label">Your Score</div>
+        <div id="scoreValue" class="score-value">0</div>
+      </div>
+
+      <div class="score-panel">
+        <div class="score-label">High Score</div>
+        <div id="highScoreValue" class="score-value">0</div>
+      </div>
+    </aside>
+  </div>
+  <div id="pacman">
+    <div id="pacmanSpeech">Hi there! I am PacMan.</div>
+    <img id="pacmanImg" src="images/pacman.png" alt="Pac-Man">
+  </div>
+  <script type="module" src="src/Game.js"></script>
+  <script src="src/Character.js"></script>
+</body>
+</html>
