@@ -1,13 +1,24 @@
 /*Global base styles*/
+html {
+  min-height: 100%;
+}
+
 body {
+  min-height: 100%;
+  background-attachment: fixed;
+  transition: 
+    background-color 0.25s ease, 
+    background-image 0.25s ease;
   margin: 0;
   font-family: 'Roboto', sans-serif;
-  min-height: 100vh;
+  font-weight: bold;
+  font-size: 18px;
   overflow-x: hidden;
-  overflow-y: hidden;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: var(--theme-text-color);
 }
 
 /*Page Titele style*/
@@ -39,13 +50,37 @@ body {
 
 /* Game Board panel*/
 .game-panel {
-  background: rgba(255, 255, 255, 0.5);
-  padding: 18px;
+  background: var(--panel-bg);
+  box-shadow: var(--panel-shadow, 0 18px 20px);
+  padding: 20px 24px;
   border-radius: 18px;
-  box-shadow: 0 2px 8px #e9d5fa;
+  margin-top: rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+/* Info Panel styles*/
+.info-panel {
+  background: var(--panel-bg);
+  box-shadow: var(--panel-shadow, 0 14px 38px);
+  padding: 20px 28px;
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 210px;
+  overflow: visible;}
+
+.info-title {
+  font-family: 'Montserrat', 'Baloo Bhaina 2', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 12px;
+  color: var(--panel-title-color);
+  text-shadow: var(--panel-title-shadow);
+  letter-spacing: 0.5px;
 }
 
 /* Square grid container*/
@@ -60,16 +95,27 @@ body {
 
 /* Grid cells: Boxes scale with grid */
 .game-box {
-  border: 2.5px solid #ae6ee5;
-  background: #fff4fd;
+  border: 2.5px solid var(--grid-border);
+  background: var(--grid-bg);
+  box-shadow: var(--grid-shadow);
+  color: var(--grid-text-color);
   font-size: clamp(16px, 4vw, 42px);
   font-weight: bold;
-  color: #6a1a99;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 10px;
-  transition: transform 0.12s ease, background 0.18s ease, box-shadow 0.18s ease;
+  transition: 
+    transform 0.12s ease, 
+    background 0.18s ease, 
+    box-shadow 0.18s ease;
+}
+
+/* Hover only on non-touch devices */
+.game-box:hover {
+  filter: brightness(1.05);
+  background-color: var(--grid-hover-bg);
+  box-shadow: var(--grid-hover-shadow);
 }
 
 /* Touch feedback */
@@ -77,170 +123,66 @@ body {
   transform: scale(0.94);
 }
 
-/* Hover only on non-touch devices */
-.game-box:hover {
-  background-color: #f2eafc;
-  box-shadow: 0 6px 16px rgba(160, 98, 200, 0.08);
-}
-
-/* Info Panel styles*/
-.info-panel {
-  background: rgba(254, 239, 255, 0.7);
-  padding: 24px 20px;
-  border-radius: 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  min-width: 210px;
-  font-family: 'Roboto', sans-serif;
-  box-shadow: 0 2px 8px #d8a7e6;
-}
-
-.info-title {
-  font-size: 1.15rem;
-  font-weight: bold;
-  color: #9616b8;
-  margin-bottom: 4px;
-  text-shadow: 1px 1px 4px #ebe3fd;
-}
-
-/* Info Panel Buttons and Scoreboard*/
-/* Mode buttons */
-.mode-btns button {
+/* Unified button base */
+button {
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  box-shadow: var(--btn-shadow);
+  border: none;
+  border-radius: 8px;
   font-size: 1rem;
   font-weight: bold;
   padding: 0.5em 1.2em;
-  border: none;
-  border-radius: 8px;
-  background: #eebffd;
-  color: #7d4196;
   cursor: pointer;
-  box-shadow: 0 2px 5px #f7e3fb;
-  transition: background 0.2s;
+  transition: background 0.2s ease, transform 0.12s ease, box-shadow 0.2s ease;
 }
 
-.mode-btns button.active {
-  background: #9b42ad;
-  color: #fff;
+/* Hover */
+button:hover {
+  filter: brightness(1.05);
 }
 
-/* Difficulty buttons */
-.difficulty-btns button {
-  font-size: 1rem;
-  font-weight: bold;
-  padding: 0.4em 1em;
-  border-radius: 8px;
-  border: none;
-  background: #eebffd;
-  color: #7d4196;
-  box-shadow: 0 2px 5px #f7e3fb;
-  cursor: pointer;
-  transition: background 0.2s;
+button:active {
+  transform: scale(0.97);
 }
 
-.difficulty-btns button.active {
-  background: #9b42ad;
-  color: #fff;
-}
-
-/* Grid size buttons */
-.grid-btns .grid-btn {
-  font-size: 1rem;
-  font-weight: bold;
-  padding: 0.4em 1em;
-  border-radius: 8px;
-  border: none;
-  background: #eebffd;
-  color: #7d4196;
-  box-shadow: 0 2px 5px #f7e3fb;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
+/* Active state for mode, difficulty, and grid size buttons */
+.mode-btns button.active,
+.difficulty-btns button.active,
 .grid-btns .grid-btn.active {
-  background: #9b42ad;
+  background: var(--btn-active-bg);
   color: #fff;
+  box-shadow: inset var(--btn-active-shadow);
 }
 
-/* Reset button */
-#reset {
-  font-size: 1rem;
-  padding: 0.55em 1.6em;
-  background: #eebffd;
-  color: #7d4196;
-  font-weight: bold;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  box-shadow: 0 2px 5px #f7e3fb;
+/* Disabled */
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: none;
 }
 
-/*Theme Switcher*/
-
-.theme-switcher {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-/* Main toggle button */
-.theme-toggle {
-  font-size: 1rem;
-  padding: 0.5em 1.4em;
-  background: #f3d9ff;
-  color: #6b2c91;
-  font-weight: bold;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  box-shadow: 0 2px 5px #ead6f7;
-}
-
-/* Options container */
-.theme-options {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  overflow: hidden;
-  max-height: 0;
-  opacity: 0;
-  transform: translateY(-4px);
-  transition:
-    max-height 0.35s ease,
-    opacity 0.25s ease,
-    transform 0.25s ease;
-}
-
-/* Expanded state */
-.theme-switcher.open .theme-options {
-  max-height: 300px; /* safely larger than content */
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Individual theme buttons */
+/* Theme selector buttons should inherit colors accordingly */
 .theme-option {
-  font-size: 0.95rem;
-  padding: 0.45em 1.2em;
+  background: transparent;
+  box-shadow: none;
   border-radius: 8px;
-  border: none;
-  background: #eebffd;
-  color: #7d4196;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 2px 5px #f7e3fb;
-  transition: background 0.2s, transform 0.12s;
+  padding: 6px 8px;
+  border: 2px solid currentColor;
+  color: currentColor;
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.12s ease;
 }
-
-.theme-option:hover {
-  background: #dba7f0;
-}
-
 .theme-option:active {
   transform: scale(0.96);
+  background: currentColor;
+  color: #fff;
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,0.35),
+    0 6px 18px rgba(0,0,0,0.25);
 }
-
 
 /* Character*/
 .character {
@@ -255,28 +197,28 @@ body {
 }
 
 .speech-bubble {
-  position: absolute;
-  top: -50px;
-  left: 60px;
-  background: white;
-  border: 2px solid #9a49a4;
+  background: var(--bubble-bg);
+  color: var(--bubble-text);
+  border: 2px solid var(--bubble-border);
   border-radius: 10px;
-  padding: 8px;
+  padding: 8px 10px;
   width: 150px;
   font-size: 1rem;
 }
 
 /* Winning animation */
 .winning-cell {
-  background: #ffe066 !important;
-  box-shadow:
-    0 0 12px rgba(255, 200, 0, 0.9),
-    0 0 24px rgba(255, 220, 120, 0.8) !important;
+  background: var(--win-bg) !important;
+  box-shadow: var(--win-glow) !important;
   animation: winPulse 0.6s ease-in-out infinite alternate;
   position: relative;
   z-index: 3;
 }
 
+.theme-option:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+}
 
 @keyframes winPulse {
   from {

@@ -1,0 +1,292 @@
+/* ===============================
+   PHASE C-1 — THEME SWITCHER (EXPAND + SCROLL UI)
+================================ */
+
+/* Root wrapper */
+.theme-switcher {
+  position: relative;
+  width: 100%;
+}
+
+/* Toggle button */
+.theme-toggle {
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+
+/* Toggle arrow */
+.theme-toggle::after {
+  content: "▾";
+  margin-left: 6px;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+/* Arrow rotate on open */
+.theme-switcher.open .theme-toggle::after {
+  transform: rotate(180deg);
+}
+
+/* Collapsed theme list */
+.theme-options {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+  transition: max-height 0.35s ease, opacity 0.25s ease;
+}
+
+/* Expanded list */
+.theme-switcher.open .theme-options {
+  max-height: 260px;
+  opacity: 1;
+  overflow-y: auto;
+}
+
+/* Desktop hover expand */
+@media (hover: hover) {
+  .theme-switcher:hover .theme-options {
+    max-height: 260px;
+    opacity: 1;
+  }
+}
+
+/* Scrollbar polish */
+.theme-options::-webkit-scrollbar {
+  width: 6px;
+}
+.theme-options::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.25);
+  border-radius: 10px;
+}
+
+/* ===============================
+   THEME BUTTON BASE
+================================ */
+
+.theme-option {
+  position: relative;
+  height: 42px;
+  width: 100%;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+/* Hover lift */
+.theme-option:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+}
+
+/* ===============================
+   LAVENDER THEME BUTTON
+================================ */
+
+.theme-option[data-theme="lavender"] {
+  background: linear-gradient(135deg, #f3e8ff, #e9d5ff, #d8b4fe);
+  color: #6b21a8;
+  box-shadow: 0 6px 14px rgba(124, 58, 237, 0.35);
+}
+
+/* Lavender glow */
+.theme-option[data-theme="lavender"]::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle, rgba(255,255,255,0.35), transparent 60%);
+  opacity: 0;
+  transform: scale(0.6);
+  transition: 0.4s ease;
+}
+
+.theme-option[data-theme="lavender"]:hover::before {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+/* ===============================
+   CHEESE THEME BUTTON
+================================ */
+
+.theme-option[data-theme="yellow"] {
+  background-image: url("CheeseTheme.png");
+  background-size: cover;
+  background-position: center;
+  color: #5a3b00;
+}
+
+/* ===============================
+   STARS THEME BUTTON
+================================ */
+
+.theme-option[data-theme="stars"] {
+  background: radial-gradient(circle at bottom, #1b2735, #020617);
+  color: #ffffff;
+}
+
+/* Star texture */
+.theme-option[data-theme="stars"]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(#fff 1px, transparent 1px);
+  background-size: 18px 18px;
+  opacity: 0.35;
+  animation: starsFloat 6s linear infinite;
+  z-index: -1;
+}
+
+@keyframes starsFloat {
+  from { background-position-y: 0; }
+  to   { background-position-y: -120px; }
+}
+
+/* ===============================
+   WAVES THEME BUTTON
+================================ */
+
+.theme-option[data-theme="waves"] {
+  background: linear-gradient(135deg, #e0f7ff, #bae6fd, #7dd3fc);
+  color: #034d73;
+  box-shadow: 0 8px 18px rgba(2, 132, 199, 0.35);
+}
+
+/* Half-wave accent */
+.theme-option[data-theme="waves"]::before {
+  content: "";
+  position: absolute;
+  left: -18px;
+  top: 50%;
+  width: 120px;
+  height: 120px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.40), transparent 60%),
+    radial-gradient(circle at 60% 70%, rgba(255, 255, 255, 0.3), transparent 65%),
+    radial-gradient(circle at 80% 40%, rgba(255,255,255,0.20), transparent 70%);
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+/* ===============================
+   ACTIVE THEME INDICATOR
+================================ */
+
+.theme-option::after {
+  content: "✓";
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  font-size: 0.9rem;
+  font-weight: 900;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: 0.25s ease;
+}
+
+body.theme-lavender .theme-option[data-theme="lavender"]::after,
+body.theme-yellow   .theme-option[data-theme="yellow"]::after,
+body.theme-stars    .theme-option[data-theme="stars"]::after,
+body.theme-waves    .theme-option[data-theme="waves"]::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ===============================
+   TOOLTIP LABEL
+================================ */
+
+.theme-option::before {
+  content: attr(data-theme);
+  position: absolute;
+  left: 105%;
+  top: 50%;
+  transform: translateY(-50%) scale(0.95);
+  background: rgba(0,0,0,0.75);
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.2s ease;
+}
+
+.theme-option:hover::before,
+.theme-option:focus-visible::before {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+}
+
+/* ===============================
+   MOBILE HORIZONTAL SWIPE
+================================ */
+
+@media (max-width: 640px) {
+  .theme-options {
+    flex-direction: row;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    scrollbar-width: none;
+  }
+
+  .theme-options::-webkit-scrollbar {
+    display: none;
+  }
+
+  .theme-option {
+    min-width: 140px;
+    flex-shrink: 0;
+  }
+}
+
+/* ===============================
+   REDUCED MOTION SUPPORT
+================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-option::before,
+  .theme-option::after {
+    animation: none;
+  }
+}
+/* ===============================
+   MOBILE — CLICK TO TOGGLE
+================================ */
+@media (max-width: 640px) {
+  .theme-options {
+    flex-direction: row;
+    gap: 12px;
+    max-height: 0;
+    opacity: 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    transition: max-height 0.35s ease, opacity 0.25s ease;
+  }
+
+  .theme-switcher.open .theme-options {
+    max-height: 120px;          /* enough for buttons */
+    opacity: 1;
+    overflow-x: auto;           /* swipe works ONLY when open */
+  }
+
+  .theme-option {
+    min-width: 140px;
+    flex-shrink: 0;
+  }
+
+  .theme-options::-webkit-scrollbar {
+    display: none;
+  }
+}
+

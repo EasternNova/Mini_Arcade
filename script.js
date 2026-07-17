@@ -1,3 +1,4 @@
+let isAITurn = false;
 
 // Advanced Tic Tac Toe with Smart AI (Easy/Hard)
 const gameGrid = document.getElementById('gameGrid');
@@ -34,7 +35,9 @@ function initBoard(size) {
 
 function handleCellClick(e) {
   const idx = parseInt(e.target.getAttribute('data-idx'));
-  if (board[idx] !== "" || isGameOver) return;
+
+  if (board[idx] !== "" || isGameOver || isAITurn) return;
+
 
   board[idx] = turn;
   e.target.textContent = turn;
@@ -63,9 +66,11 @@ function handleCellClick(e) {
   turn = turn === "X" ? "O" : "X";
   infoText.textContent = `Turn for ${turn}`;
 
-  if (isSinglePlayer && turn === "O") {
-    setTimeout(aiMove, 600);
-  }
+ if (isSinglePlayer && turn === "O") {
+  isAITurn = true;
+  setTimeout(aiMove, 600);
+ }
+
 }
 
 
@@ -125,8 +130,9 @@ function postAIMove() {
     turn = "X";
     infoText.textContent = `Turn for X`;
   }
+  
+  isAITurn = false;
 }
-
 
 function checkWin(b, size, player) {
   const countToWin = size === 3 ? 3 : 4;
@@ -322,7 +328,7 @@ setInterval(randomSpeech, 6000);
 // Initialize
 initBoard(currentSize);
 
-new LavenderParticles();
+let lavenderInstance = null;
 
 // Theme switcher toggle (UI only for now)
 const themeSwitcher = document.getElementById('themeSwitcher');
@@ -342,9 +348,10 @@ function applyTheme(theme) {
     'theme-stars',
     'theme-waves'
   );
+
   document.body.classList.add(`theme-${theme}`);
 
-// Cleanup lavender particles if switching away
+  // Stop lavender particles if running
   if (lavenderInstance) {
     lavenderInstance = null;
   }
@@ -360,14 +367,31 @@ function applyTheme(theme) {
   }
 }
 
+
 applyTheme(DEFAULT_THEME);
 const themeButtons = document.querySelectorAll('.theme-option');
 
 themeButtons.forEach(button => {
   button.addEventListener('click', () => {
     const selectedTheme = button.getAttribute('data-theme');
+
+    themeButtons.forEach(b => b.classList.remove('active'));
+    button.classList.add('active');
+
     applyTheme(selectedTheme);
   });
+});
+
+let collapseTimer;
+
+themeSwitcher.addEventListener("mouseenter", () => {
+  clearTimeout(collapseTimer);
+});
+
+themeSwitcher.addEventListener("mouseleave", () => {
+  collapseTimer = setTimeout(() => {
+    themeSwitcher.classList.remove("open");
+  }, 400);
 });
 
 /* ===============================

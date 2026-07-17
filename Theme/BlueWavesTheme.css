@@ -1,38 +1,70 @@
 /* Blue Waves theme root */
 body.theme-waves {
-  --theme-text-color: #e0f2fe;
   background:
-    radial-gradient(120% 50% at 50% -20%, rgba(255,255,255,0.25), transparent 60%),
-    linear-gradient(180deg, #38bdf8 0%, #0ea5e9 35%, #0284c7 70%, #0369a1 100%);
+  radial-gradient(120% 50% at 50% -20%, rgba(255,255,255,0.25), transparent 60%),
+  linear-gradient(180deg, #38bdf8 0%, #0ea5e9 35%, #0284c7 70%, #0369a1 100%);
+
+  --theme-text-color: #004000;
+
+  --panel-bg: rgba(255,255,255,0.85);
+  --panel-shadow: rgba(2, 132, 199, 0.35);
+  --panel-text-color: #034d73;
+  --panel-title-shadow: 
+  0 2px 6px rgb(255, 255, 255),
+  0 6px 18px rgba(3, 105, 161, 0.45);  
+
+  --grid-border: #0284c7;
+  --grid-bg: #e0f7ff;
+  --grid-shadow: 0 4px 12px rgba(2, 132, 199, 0.2);
+  --grid-text-color: #034d73;
+  --grid-hover-bg: #d0f0ff;
+  --grid-hover-shadow: 0 6px 16px rgba(2, 132, 199, 0.25);
+
+  --btn-bg: #7dd3fc;
+  --btn-text: #034d73;
+  --btn-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+  --btn-active-bg: #0284c7;
+  --btn-active-shadow: 0 2px 6px rgba(2, 100, 150, 0.25);
+ 
+
+  --focus-ring: #0284c7;
+  --panel-title-color: #0369a1;
+  --panel-shadow-color: #034d73;
+
+
+  
+  --bubble-bg: rgba(240, 252, 255, 0.95);
+  --bubble-border: #0284c7;
+  --bubble-text: #034d73;  
+
+  --win-bg: #a5f3fc;
+  --win-glow: 
+    0 0 12px rgba(3, 105, 161, 0.9),
+    0 0 24px rgba(14, 165, 233, 0.8);
 }
 
 /* Title */
 body.theme-waves .welcome-title {
-  color: #ffffff;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
-}
-
-/* Panels */
-body.theme-waves .game-panel,
-body.theme-waves .info-panel {
-  background: rgba(255,255,255,0.85);
-  box-shadow: 0 8px 20px rgba(2,132,199,0.35);
+  color: #034d73;
+  text-shadow: 
+  0 6px 18px rgba(3, 105, 161, 0.45),
+  0 2px 6px rgb(255, 255, 255);  
 }
 
 /* Hide waves by default */
 #container {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
   display: none;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
 /* Enable waves only for waves theme */
 body.theme-waves #container {
   display: block;
-  position: absolute; /* NOT fixed */
-  inset: 0;
-  z-index: -1;
-  overflow: hidden;
-  pointer-events: none;
-  background: linear-gradient(135deg, #00adef 0%, #0076e5 100%);
 }
 
 /* Inner wave layer */
