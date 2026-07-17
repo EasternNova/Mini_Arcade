@@ -1,0 +1,189 @@
+/*Global base styles*/
+html {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100%;
+  background-attachment: fixed;
+  transition:
+    background-color 0.25s ease,
+    background-image 0.25s ease;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  font-size: 18px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--theme-text-color);
+}
+
+/* Page Title style */
+.welcome-title {
+  position: relative;
+  z-index: 2;
+  font-family: 'Montserrat', 'Baloo Bhaina 2', Arial, sans-serif;
+  font-weight: 900;
+  font-size: 3rem;
+  color: inherit;
+  text-shadow: inherit;
+  letter-spacing: 3px;
+  margin-top: 1.5rem;
+  text-align: center;
+
+  margin: 0.5rem 0;
+}
+
+/* Container wrapper for game and info panel: Main Layout wrapper */
+.container-wrapper {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  padding: 0 16px;
+}
+
+/* Game Board panel*/
+.game-panel {
+  background: var(--panel-bg);
+  box-shadow: var(--panel-shadow, 0 18px 20px);
+  padding: 20px 24px;
+  border-radius: 18px;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Info Panel styles*/
+.info-panel {
+  background: var(--panel-bg);
+  box-shadow: var(--panel-shadow, 0 14px 38px);
+  padding: 6px 8px;
+  font-size: 1rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 210px;
+  overflow: visible;
+}
+
+.info-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 12px;
+  color: var(--panel-title-color);
+  text-shadow: var(--panel-title-shadow);
+  letter-spacing: 0.5px;
+}
+
+/* Square grid container*/
+.game-grid {
+  display: grid;
+  width: min(88vw, 520px);
+  aspect-ratio: 1 / 1;
+  gap: 6px;
+  margin: 8px auto;
+  box-sizing: border-box;
+}
+
+/* Grid cells: Boxes scale with grid */
+.game-box {
+  border: 2.5px solid var(--grid-border);
+  background: var(--grid-bg);
+  box-shadow: var(--grid-shadow);
+  color: var(--grid-text-color);
+  padding: 6px 8px;
+  font-size: clamp(16px, 4vw, 42px);
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  transition:
+    transform 0.12s ease,
+    background 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+/* Hover only on non-touch devices */
+.game-box:hover {
+  filter: brightness(1.05);
+  background-color: var(--grid-hover-bg);
+  box-shadow: var(--grid-hover-shadow);
+}
+
+/* Touch feedback */
+.game-box:active {
+  transform: scale(0.94);
+}
+
+/* Unified button base */
+button {
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  box-shadow: var(--btn-shadow);
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0.5em 1.2em;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.12s ease, box-shadow 0.2s ease;
+}
+
+/* Hover */
+button:hover {
+  filter: brightness(1.05);
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+/* Active state for mode, difficulty, and grid size buttons */
+.mode-btns button.active,
+.difficulty-btns button.active,
+.grid-btns .grid-btn.active {
+  background: var(--btn-active-bg);
+  color: #fff;
+  box-shadow: inset var(--btn-active-shadow);
+}
+
+/* Disabled */
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Winning animation */
+.winning-cell {
+  background: var(--win-bg) !important;
+  box-shadow: var(--win-glow) !important;
+  animation: winPulse 0.6s ease-in-out infinite alternate;
+  position: relative;
+  z-index: 3;
+}
+
+.theme-option:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+@keyframes winPulse {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.05);
+  }
+}

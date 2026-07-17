@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tic Tac Toe </title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png" />
+
+  <!-- Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Core Styles -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="responsive.css" />
+
+  <!-- Theme Styles -->
+  <link rel="stylesheet" href="Theme/LavenderParticles.css" />
+  <link rel="stylesheet" href="Theme/Summer.css" />
+  <link rel="stylesheet" href="Theme/ParallaxStars.css" />
+  <link rel="stylesheet" href="Theme/BlueWaves.css" />
+  <link rel="stylesheet" href="Theme/ThemeExpandSwitch.css" />
+
+  <!-- Character -->
+  <link rel="stylesheet" href="Character/character.css" />
+</head>
+
+<body>
+
+  <!-- Parallax Stars Theme -->
+  <div id="stars-theme">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>
+  </div>
+
+  <!-- Animated Circles Background -->
+  <div id="container">
+    <div id="container-inside">
+      <!-- Decorative circles -->
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+    </div>
+  </div>
+
+  <!-- Lavender Theme Canvas -->
+  <div id="lavender-theme">
+    <canvas id="lavender-canvas"></canvas>
+  </div>
+
+  <!-- Page Title -->
+  <h1 class="welcome-title">Welcome to the Tic Tac Toe Game</h1>
+
+  <!-- Main Game Layout -->
+  <div class="container-wrapper">
+
+    <!-- Game Board -->
+    <div class="game-panel">
+      <div class="game-grid" id="gameGrid"></div>
+    </div>
+
+    <!-- Control & Info Panel -->
+    <div class="info-panel">
+
+      <div class="info-title">Choose your game mode</div>
+
+      <!-- Theme Switcher -->
+      <div class="theme-switcher" id="themeSwitcher">
+        <button class="theme-toggle" aria-expanded="false">
+          Theme
+        </button>
+
+        <div class="theme-options">
+          <button class="theme-option" data-theme="lavender">Lavender</button>
+          <button class="theme-option" data-theme="yellow">Summer</button>
+          <button class="theme-option" data-theme="stars">Parallax Stars</button>
+          <button class="theme-option" data-theme="waves">Blue Waves</button>
+        </div>
+      </div>
+
+      <!-- Game Mode -->
+      <div class="mode-btns">
+        <button id="one-player" class="active">1 Player</button>
+        <button id="two-player">2 Player</button>
+      </div>
+
+      <!-- Difficulty -->
+      <div class="difficulty-btns">
+        <span class="difficulty-title">AI Level:</span>
+        <button id="easy-ai" class="active">Easy</button>
+        <button id="hard-ai">Hard</button>
+      </div>
+
+      <!-- Grid Size -->
+      <div class="grid-btns">
+        <button class="grid-btn active" data-size="3">3 × 3</button>
+        <button class="grid-btn" data-size="5">5 × 5</button>
+        <button class="grid-btn" data-size="7">7 × 7</button>
+      </div>
+
+      <!-- Scoreboard -->
+      <div class="scoreboard">
+        <div>X Score: <span id="x-score">0</span></div>
+        <div>O Score: <span id="o-score">0</span></div>
+      </div>
+
+      <!-- Game Info -->
+      <button id="reset">Reset</button>
+      <div class="info" id="infoText">Turn for X</div>
+
+    </div>
+  </div>
+
+  <!-- Character -->
+  <div class="character">
+    <img
+      src="Character/character.png"
+      class="char-img"
+      alt="Game Character"
+    />
+    <div class="speech-bubble" id="speech">Let's play!</div>
+  </div>
+
+  <!-- Theme Scripts -->
+  <script src="Theme/lavenderParticles.js" defer></script>
+  <script src="Theme/ParallaxStars.js" defer></script>
+  <script src="Theme/BlueWaves.js" defer></script>
+  <script src="Theme/ThemeExpandSwitch.js" defer></script>
+
+  <!-- Game Logic -->
+  <script src="Game/GameLogic.js" defer></script>
+  <script src="Game/AI.js" defer></script>
+  <script src="Game/GridManager.js" defer></script>
+  <script src="Game/Scoreboard.js" defer></script>
+  <script src="Game/ButtonManager.js" defer></script>
+
+  <!-- Character Logic -->
+  <script src="Character/character.js" defer></script>
+
+  <!-- App Entry -->
+  <script src="ThemeManager.js" defer></script>
+  <script src="script.js" defer></script>
+
+</body>
+</html>

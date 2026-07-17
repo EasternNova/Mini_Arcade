@@ -1,0 +1,107 @@
+/* Defines colors and variables for the stars theme */
+body.theme-stars {
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%) !important;
+  --focus-ring: #2563eb;
+
+  --theme-text-color: #ffffff;
+
+  --panel-bg: rgba(15, 23, 42, 0.65);
+  --panel-shadow: rgba(0, 0, 0, 0);
+  --panel-title-color: #ffffff;
+  --panel-title-shadow: 2px 4px 10px #ffffff90;
+
+  --grid-border: #444c56;
+  --grid-bg: rgba(255, 255, 255, 0.05);
+  --grid-shadow: 0 4px 12px rgba(0, 0, 0, 0); 
+  --grid-text-color: #e0e7ff;
+  --grid-hover-bg: rgba(255, 255, 255, 0.1);
+  --grid-hover-shadow: 0 6px 16px rgba(0, 0, 0, 0);
+
+  --btn-bg: #374151;
+  --btn-text: #ffffff;
+  --btn-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+  --btn-active-bg: #6b7280;
+  --btn-active-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+
+  --bubble-bg: rgba(20, 29, 50, 0.85);  
+  --bubble-border: #2563eb;
+  --bubble-text: #ffffff;
+
+  --win-bg: #0363fd2b;
+  --win-glow:
+    0 0 12px rgba(255, 255, 255, 0.692),
+    0 0 28px rgba(105, 160, 237, 0.491);
+}
+
+/* Styles the title for the stars theme */
+body.theme-stars .welcome-title {
+  color: #ffffff;
+  text-shadow: 2px 4px 10px #ffffff90;
+}
+
+/* Base container for star animation layers */
+#stars-theme {
+  position: fixed;
+  inset: 0;
+  z-index: 1; 
+  pointer-events: none;
+  overflow: hidden;
+  display: none;  
+}
+
+/* Shows the star background only when stars theme is active */
+body.theme-stars #stars-theme {
+  display: block;
+}
+
+/* Shared base styles for star layers */
+#stars,
+#stars2,
+#stars3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent;
+}
+
+/* Controls vertical movement of stars */
+@keyframes animStar {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-2000px); }
+}
+
+/* Small distant stars */
+#stars {
+  width: 1px;
+  height: 1px;
+  box-shadow: var(--stars1-shadow);
+  animation: animStar 50s linear infinite;
+}
+
+/* Medium stars */
+#stars2 {
+  width: 2px;
+  height: 2px;
+  box-shadow: var(--stars2-shadow);
+  animation: animStar 100s linear infinite;
+}
+
+/* Large foreground stars */
+#stars3 {
+  width: 3px;
+  height: 3px;
+  box-shadow: var(--stars3-shadow);
+  animation: animStar 150s linear infinite;
+}
+
+/* Duplicates stars to create seamless vertical looping */
+#stars::after,
+#stars2::after,
+#stars3::after {
+  content: "";
+  position: absolute;
+  top: 2000px;
+  width: inherit;
+  height: inherit;
+  box-shadow: inherit;
+}

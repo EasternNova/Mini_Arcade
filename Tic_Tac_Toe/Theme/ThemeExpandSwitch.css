@@ -1,0 +1,183 @@
+/* Theme switcher container */
+.theme-switcher {
+  position: relative;
+  width: 100%;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  width: 100%;
+  text-align: center;
+}
+
+/* Dropdown arrow indicator */
+.theme-toggle::after {
+  content: "▾";
+  margin-left: 6px;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+/* Rotates arrow when theme list is open */
+.theme-switcher.open .theme-toggle::after {
+  transform: rotate(180deg);
+}
+
+/* Theme list default collapsed state */
+.theme-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, opacity 0.25s ease;
+}
+
+/* Theme list expanded state */
+.theme-switcher.open .theme-options {
+  max-height: 320px;
+  opacity: 1;
+  overflow-y: auto;
+}
+
+/* Base style for each theme option */
+.theme-option {
+  position: relative;
+  height: 44px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/* Hover feedback for theme options on desktop */
+@media (hover: hover) {
+  .theme-option:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+  }
+}
+
+/* Lavender theme option styling */
+.theme-option[data-theme="lavender"] {
+  background: linear-gradient(135deg, #f3e8ff, #e9d5ff, #d8b4fe);
+  color: #6b21a8;
+}
+
+/* Lavender glow effect */
+.theme-option[data-theme="lavender"]::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle, rgba(255,255,255,0.35), transparent 60%);
+  opacity: 0;
+  transform: scale(0.6);
+  transition: 0.4s ease;
+}
+
+/* Lavender glow on hover */
+.theme-option[data-theme="lavender"]:hover::before {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+/* Summer theme option styling */
+.theme-option[data-theme="yellow"] {
+  background-image: url("Summer.png");
+  background-size: cover;
+  background-position: center;
+  color: #5a3b00;
+}
+
+/* Stars theme option styling */
+.theme-option[data-theme="stars"] {
+  background: radial-gradient(circle at bottom, #1b2735, #020617);
+  color: #ffffff;
+}
+
+/* Stars texture overlay */
+.theme-option[data-theme="stars"]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(#fff 1px, transparent 1px);
+  background-size: 18px 18px;
+  opacity: 0.35;
+  animation: starsFloat 6s linear infinite;
+}
+
+/* Animation for floating stars texture */
+@keyframes starsFloat {
+  from { background-position-y: 0; }
+  to { background-position-y: -120px; }
+}
+
+/* Waves theme option styling */
+.theme-option[data-theme="waves"] {
+  background: linear-gradient(135deg, #e0f7ff, #bae6fd, #7dd3fc);
+  color: #034d73;
+}
+
+/* Waves decorative accent */
+.theme-option[data-theme="waves"]::before {
+  content: "";
+  position: absolute;
+  left: -18px;
+  top: 50%;
+  width: 120px;
+  height: 120px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.4), transparent 60%),
+    radial-gradient(circle at 60% 70%, rgba(255,255,255,0.3), transparent 65%);
+  opacity: 0.85;
+}
+
+/* Active theme checkmark indicator */
+.theme-option::after {
+  content: "✓";
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  font-size: 0.9rem;
+  font-weight: 900;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: 0.25s ease;
+}
+
+/* Displays active theme indicator */
+body.theme-lavender .theme-option[data-theme="lavender"]::after,
+body.theme-yellow .theme-option[data-theme="yellow"]::after,
+body.theme-stars .theme-option[data-theme="stars"]::after,
+body.theme-waves .theme-option[data-theme="waves"]::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Mobile layout adjustments */
+@media (max-width: 640px) {
+  .theme-options {
+    flex-direction: column;
+  /* Optional horizontal scroll layout for mobile */
+  }
+
+  /* Hides theme list when collapsed on mobile */
+  .theme-switcher:not(.open) .theme-options {
+    display: none;
+  }
+
+  /* Minimum size for theme buttons on mobile */
+  .theme-option {
+    min-width: 140px;
+    flex-shrink: 0;
+  }
+
+  /* Hides scrollbar for cleaner mobile UI */
+  .theme-options::-webkit-scrollbar {
+    display: none;
+  }
+}
