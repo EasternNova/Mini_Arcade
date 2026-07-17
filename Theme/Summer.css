@@ -1,5 +1,6 @@
+/* Defines colors, background, and variables for the summer theme */
 body.theme-yellow {
-  background-image: url('CheeseTheme.png');
+  background-image: url('Summer.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -36,15 +37,14 @@ body.theme-yellow {
 
   --win-bg: #fff1a8;
   --win-glow:
-    0 0 12px rgba(255, 200, 0, 0.9),
-    0 0 24px rgba(255, 220, 120, 0.8);  
+    0 0 12px rgba(255, 200, 0, 0.711),
+    0 0 24px rgba(255, 219, 120, 0.696);  
 }
 
-
+/* Styles the title specifically for the summer theme */
 body.theme-yellow .welcome-title {
   color: #6b3f00;
   text-shadow:
     0 2px 6px rgba(255, 200, 0, 0.6),
     0 6px 18px rgba(255, 180, 0, 0.45);
 }
-/* Theme selector buttons should inherit colors accordingly */

@@ -19,6 +19,7 @@
   }
 
   .container-wrapper {
+    align-items: center;
     flex-direction: column;
     align-items: center;
     gap: 24px;
@@ -26,6 +27,8 @@
 
   .game-panel {
     order: 1;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .character {
@@ -42,6 +45,9 @@
     order: 3;
     width: 100%;
     max-width: 420px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
   }
 
@@ -70,5 +76,59 @@
 @media (hover: hover) and (pointer: fine) {
   .game-box:hover {
     box-shadow: 0 6px 16px rgba(160, 98, 200, 0.08);
+  }
+}
+
+/* Prevent character overlap */
+.character {
+  z-index: 5;
+}
+
+.game-panel {
+  z-index: 10;
+}
+
+/* Desktop spacing */
+@media (min-width: 1024px) {
+  .character {
+    bottom: 24px;
+    left: 24px;
+  }
+}
+
+/* Mobile: push character below grid */
+@media (max-width: 768px) {
+  .character {
+    position: relative;
+    margin-top: 16px;
+    left: auto;
+    bottom: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .welcome-title {
+    font-size: 2.2rem;
+  }
+
+  .info-title {
+    font-size: 1.1rem;
+  }
+
+  .theme-option,
+  .mode-btns button,
+  .grid-btn,
+  #reset {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-title {
+    font-size: 1.8rem;
+  }
+
+  .theme-option {
+    padding: 8px 10px;
   }
 }

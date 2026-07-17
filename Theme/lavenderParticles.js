@@ -1,8 +1,26 @@
+// Controls enabling and disabling the lavender particle effect
+(function () {
+  let instance = null;
+
+  window.LavenderTheme = {
+    enable() {
+      if (!instance) {
+        instance = new LavenderParticles();
+      }
+    },
+    disable() {
+      instance = null;
+    }
+  };
+})();
+
+// Manages the full lavender particle animation system
 class LavenderParticles {
   constructor() {
     this.canvas = document.getElementById('lavender-canvas');
     this.ctx = this.canvas.getContext('2d');
 
+    // Configuration for particle appearance and motion
     this.config = {
       count: 10,
       size: { min: 1200, max: 1600, pulse: 0 },
@@ -12,7 +30,7 @@ class LavenderParticles {
       },
       colors: {
         background: '#d8bffd',
-        particles: ['#c084fc', '#e9d5ff', '#a78bfa', '#f3e8ff','#b16cff']
+        particles: ['#c084fc', '#e9d5ff', '#a78bfa', '#f3e8ff', '#b16cff']
       },
       blending: 'lighten',
       opacity: { center: 0.85, edge: 0.12 },
@@ -26,12 +44,14 @@ class LavenderParticles {
     this.animate();
   }
 
+  // Resizes canvas to match viewport
   resize() {
     this.canvas.width = window.innerWidth;
     this.canvas.height = window.innerHeight;
     this.canvas.style.background = this.config.colors.background;
   }
 
+  // Creates particle instances based on configuration
   createParticles() {
     this.particles = [];
     for (let i = 0; i < this.config.count; i++) {
@@ -39,6 +59,7 @@ class LavenderParticles {
     }
   }
 
+  // Runs the animation loop
   animate() {
     requestAnimationFrame(() => this.animate());
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -48,13 +69,15 @@ class LavenderParticles {
   }
 }
 
+// Represents a single moving lavender particle
 class LavenderParticle {
   constructor(system) {
     this.system = system;
     this.reset();
   }
 
-    reset() {
+  // Initializes or resets particle state
+  reset() {
     this.x = Math.random() * this.system.canvas.width;
     this.y = Math.random() * this.system.canvas.height;
     this.size = Math.random() * 300 + 500;
@@ -65,7 +88,7 @@ class LavenderParticle {
     ];
   }
 
-
+  // Updates particle position and renders it
   update(ctx) {
     this.x += this.vx;
     this.y += this.vy;

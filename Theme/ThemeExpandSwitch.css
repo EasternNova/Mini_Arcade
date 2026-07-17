@@ -1,21 +1,16 @@
-/* ===============================
-   PHASE C-1 — THEME SWITCHER (EXPAND + SCROLL UI)
-================================ */
-
-/* Root wrapper */
+/* Theme switcher container */
 .theme-switcher {
   position: relative;
   width: 100%;
 }
 
-/* Toggle button */
+/* Theme toggle button */
 .theme-toggle {
   width: 100%;
   text-align: center;
-  position: relative;
 }
 
-/* Toggle arrow */
+/* Dropdown arrow indicator */
 .theme-toggle::after {
   content: "▾";
   margin-left: 6px;
@@ -23,80 +18,55 @@
   transition: transform 0.3s ease;
 }
 
-/* Arrow rotate on open */
+/* Rotates arrow when theme list is open */
 .theme-switcher.open .theme-toggle::after {
   transform: rotate(180deg);
 }
 
-/* Collapsed theme list */
+/* Theme list default collapsed state */
 .theme-options {
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: 10px;
   margin-top: 8px;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
   transition: max-height 0.35s ease, opacity 0.25s ease;
 }
 
-/* Expanded list */
+/* Theme list expanded state */
 .theme-switcher.open .theme-options {
-  max-height: 260px;
+  max-height: 320px;
   opacity: 1;
   overflow-y: auto;
 }
 
-/* Desktop hover expand */
-@media (hover: hover) {
-  .theme-switcher:hover .theme-options {
-    max-height: 260px;
-    opacity: 1;
-  }
-}
-
-/* Scrollbar polish */
-.theme-options::-webkit-scrollbar {
-  width: 6px;
-}
-.theme-options::-webkit-scrollbar-thumb {
-  background: rgba(0,0,0,0.25);
-  border-radius: 10px;
-}
-
-/* ===============================
-   THEME BUTTON BASE
-================================ */
-
+/* Base style for each theme option */
 .theme-option {
   position: relative;
-  height: 42px;
-  width: 100%;
+  height: 44px;
   border-radius: 10px;
   font-weight: 700;
   cursor: pointer;
   overflow: hidden;
-  isolation: isolate;
-  transition: transform 0.2s ease, box-shadow 0.25s ease;
 }
 
-/* Hover lift */
-.theme-option:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+/* Hover feedback for theme options on desktop */
+@media (hover: hover) {
+  .theme-option:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+  }
 }
 
-/* ===============================
-   LAVENDER THEME BUTTON
-================================ */
-
+/* Lavender theme option styling */
 .theme-option[data-theme="lavender"] {
   background: linear-gradient(135deg, #f3e8ff, #e9d5ff, #d8b4fe);
   color: #6b21a8;
-  box-shadow: 0 6px 14px rgba(124, 58, 237, 0.35);
 }
 
-/* Lavender glow */
+/* Lavender glow effect */
 .theme-option[data-theme="lavender"]::before {
   content: "";
   position: absolute;
@@ -107,32 +77,27 @@
   transition: 0.4s ease;
 }
 
+/* Lavender glow on hover */
 .theme-option[data-theme="lavender"]:hover::before {
   opacity: 1;
   transform: scale(1.2);
 }
 
-/* ===============================
-   CHEESE THEME BUTTON
-================================ */
-
+/* Summer theme option styling */
 .theme-option[data-theme="yellow"] {
-  background-image: url("CheeseTheme.png");
+  background-image: url("Summer.png");
   background-size: cover;
   background-position: center;
   color: #5a3b00;
 }
 
-/* ===============================
-   STARS THEME BUTTON
-================================ */
-
+/* Stars theme option styling */
 .theme-option[data-theme="stars"] {
   background: radial-gradient(circle at bottom, #1b2735, #020617);
   color: #ffffff;
 }
 
-/* Star texture */
+/* Stars texture overlay */
 .theme-option[data-theme="stars"]::before {
   content: "";
   position: absolute;
@@ -141,25 +106,21 @@
   background-size: 18px 18px;
   opacity: 0.35;
   animation: starsFloat 6s linear infinite;
-  z-index: -1;
 }
 
+/* Animation for floating stars texture */
 @keyframes starsFloat {
   from { background-position-y: 0; }
-  to   { background-position-y: -120px; }
+  to { background-position-y: -120px; }
 }
 
-/* ===============================
-   WAVES THEME BUTTON
-================================ */
-
+/* Waves theme option styling */
 .theme-option[data-theme="waves"] {
   background: linear-gradient(135deg, #e0f7ff, #bae6fd, #7dd3fc);
   color: #034d73;
-  box-shadow: 0 8px 18px rgba(2, 132, 199, 0.35);
 }
 
-/* Half-wave accent */
+/* Waves decorative accent */
 .theme-option[data-theme="waves"]::before {
   content: "";
   position: absolute;
@@ -170,17 +131,12 @@
   transform: translateY(-50%);
   border-radius: 50%;
   background:
-    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.40), transparent 60%),
-    radial-gradient(circle at 60% 70%, rgba(255, 255, 255, 0.3), transparent 65%),
-    radial-gradient(circle at 80% 40%, rgba(255,255,255,0.20), transparent 70%);
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.4), transparent 60%),
+    radial-gradient(circle at 60% 70%, rgba(255,255,255,0.3), transparent 65%);
   opacity: 0.85;
-  pointer-events: none;
 }
 
-/* ===============================
-   ACTIVE THEME INDICATOR
-================================ */
-
+/* Active theme checkmark indicator */
 .theme-option::after {
   content: "✓";
   position: absolute;
@@ -193,100 +149,35 @@
   transition: 0.25s ease;
 }
 
+/* Displays active theme indicator */
 body.theme-lavender .theme-option[data-theme="lavender"]::after,
-body.theme-yellow   .theme-option[data-theme="yellow"]::after,
-body.theme-stars    .theme-option[data-theme="stars"]::after,
-body.theme-waves    .theme-option[data-theme="waves"]::after {
+body.theme-yellow .theme-option[data-theme="yellow"]::after,
+body.theme-stars .theme-option[data-theme="stars"]::after,
+body.theme-waves .theme-option[data-theme="waves"]::after {
   opacity: 1;
   transform: scale(1);
 }
 
-/* ===============================
-   TOOLTIP LABEL
-================================ */
-
-.theme-option::before {
-  content: attr(data-theme);
-  position: absolute;
-  left: 105%;
-  top: 50%;
-  transform: translateY(-50%) scale(0.95);
-  background: rgba(0,0,0,0.75);
-  color: #fff;
-  padding: 4px 8px;
-  border-radius: 6px;
-  font-size: 0.75rem;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: 0.2s ease;
-}
-
-.theme-option:hover::before,
-.theme-option:focus-visible::before {
-  opacity: 1;
-  transform: translateY(-50%) scale(1);
-}
-
-/* ===============================
-   MOBILE HORIZONTAL SWIPE
-================================ */
-
+/* Mobile layout adjustments */
 @media (max-width: 640px) {
   .theme-options {
-    flex-direction: row;
-    overflow-x: auto;
-    padding-bottom: 6px;
-    scrollbar-width: none;
+    flex-direction: column;
+  /* Optional horizontal scroll layout for mobile */
   }
 
-  .theme-options::-webkit-scrollbar {
+  /* Hides theme list when collapsed on mobile */
+  .theme-switcher:not(.open) .theme-options {
     display: none;
   }
 
-  .theme-option {
-    min-width: 140px;
-    flex-shrink: 0;
-  }
-}
-
-/* ===============================
-   REDUCED MOTION SUPPORT
-================================ */
-
-@media (prefers-reduced-motion: reduce) {
-  .theme-option::before,
-  .theme-option::after {
-    animation: none;
-  }
-}
-/* ===============================
-   MOBILE — CLICK TO TOGGLE
-================================ */
-@media (max-width: 640px) {
-  .theme-options {
-    flex-direction: row;
-    gap: 12px;
-    max-height: 0;
-    opacity: 0;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    transition: max-height 0.35s ease, opacity 0.25s ease;
-  }
-
-  .theme-switcher.open .theme-options {
-    max-height: 120px;          /* enough for buttons */
-    opacity: 1;
-    overflow-x: auto;           /* swipe works ONLY when open */
-  }
-
+  /* Minimum size for theme buttons on mobile */
   .theme-option {
     min-width: 140px;
     flex-shrink: 0;
   }
 
+  /* Hides scrollbar for cleaner mobile UI */
   .theme-options::-webkit-scrollbar {
     display: none;
   }
 }
-

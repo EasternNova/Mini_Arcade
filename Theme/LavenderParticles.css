@@ -1,3 +1,4 @@
+/* Lavender theme root variables and background */
 body.theme-lavender {
   background: #d8bffd;
   box-shadow: 0 12px 30px rgba(124, 58, 237, 0.28);
@@ -11,10 +12,10 @@ body.theme-lavender {
   --panel-title-shadow: 0 2px 6px rgba(113, 23, 111, 0.6);
  
   --grid-border: #ae6ee5;
-  --grid-bg: #fff4fd;
+  --grid-bg: #fff4fd5b;
   --grid-shadow: 0 6px 16px rgba(160, 98, 200, 0.08);
   --grid-text-color: #410202;
-  --grid-hover-bg: #f2eafc;
+  --grid-hover-bg: #f2eafc8d;
   --grid-hover-shadow: 0 8px 20px rgba(160, 98, 200, 0.12);
 
   --btn-bg: #eebffd;
@@ -33,12 +34,13 @@ body.theme-lavender {
     0 0 24px rgba(227, 191, 251, 0.728);
 }
 
+/* Theme-specific title styling */
 body.theme-lavender .welcome-title {
   color: #6b2161;
-  text-shadow:0 2px 6px rgba(113, 23, 111, 0.6);
-
+  text-shadow: 0 2px 6px rgba(113, 23, 111, 0.6);
 }
 
+/* Enables the lavender particle canvas only when the lavender theme is active */
 body.theme-lavender #lavender-theme {
   position: fixed;
   inset: 0;

@@ -25,14 +25,11 @@ body.theme-waves {
   --btn-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
   --btn-active-bg: #0284c7;
   --btn-active-shadow: 0 2px 6px rgba(2, 100, 150, 0.25);
- 
 
   --focus-ring: #0284c7;
   --panel-title-color: #0369a1;
   --panel-shadow-color: #034d73;
 
-
-  
   --bubble-bg: rgba(240, 252, 255, 0.95);
   --bubble-border: #0284c7;
   --bubble-text: #034d73;  
@@ -89,7 +86,7 @@ body.theme-waves .circle {
   animation-delay: calc(var(--i) * 0.15s);
 }
 
-/* Circle index */
+/* Map circle index to CSS variable for staggered sizing and animation */
 body.theme-waves .circle:nth-child(1){--i:0;}
 body.theme-waves .circle:nth-child(2){--i:1;}
 body.theme-waves .circle:nth-child(3){--i:2;}

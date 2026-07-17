@@ -1,3 +1,4 @@
+/* Defines colors and variables for the stars theme */
 body.theme-stars {
   background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%) !important;
   --focus-ring: #2563eb;
@@ -32,27 +33,28 @@ body.theme-stars {
     0 0 28px rgba(105, 160, 237, 0.491);
 }
 
+/* Styles the title for the stars theme */
 body.theme-stars .welcome-title {
   color: #ffffff;
   text-shadow: 2px 4px 10px #ffffff90;
 }
 
-/* Stars container */
+/* Base container for star animation layers */
 #stars-theme {
   position: fixed;
   inset: 0;
-  z-index: 0; 
+  z-index: 1; 
   pointer-events: none;
   overflow: hidden;
   display: none;  
 }
 
-/* Visible only in stars theme */
+/* Shows the star background only when stars theme is active */
 body.theme-stars #stars-theme {
   display: block;
 }
 
-/* Star layers */
+/* Shared base styles for star layers */
 #stars,
 #stars2,
 #stars3 {
@@ -62,13 +64,13 @@ body.theme-stars #stars-theme {
   background: transparent;
 }
 
-/* Animation */
+/* Controls vertical movement of stars */
 @keyframes animStar {
   from { transform: translateY(0); }
   to   { transform: translateY(-2000px); }
 }
 
-/* Layer 1 */
+/* Small distant stars */
 #stars {
   width: 1px;
   height: 1px;
@@ -76,7 +78,7 @@ body.theme-stars #stars-theme {
   animation: animStar 50s linear infinite;
 }
 
-/* Layer 2 */
+/* Medium stars */
 #stars2 {
   width: 2px;
   height: 2px;
@@ -84,7 +86,7 @@ body.theme-stars #stars-theme {
   animation: animStar 100s linear infinite;
 }
 
-/* Layer 3 */
+/* Large foreground stars */
 #stars3 {
   width: 3px;
   height: 3px;
@@ -92,7 +94,7 @@ body.theme-stars #stars-theme {
   animation: animStar 150s linear infinite;
 }
 
-/* Seamless looping */
+/* Duplicates stars to create seamless vertical looping */
 #stars::after,
 #stars2::after,
 #stars3::after {

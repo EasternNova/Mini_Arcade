@@ -1,0 +1,26 @@
+/* Character*/
+.character {
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+  z-index: 3;
+}
+
+.char-img {
+  width: 100px;
+}
+
+.speech-bubble {
+  background: var(--bubble-bg);
+  color: var(--bubble-text);
+  border: 2px solid var(--bubble-border);
+  border-radius: 10px;
+  padding: 8px 10px;
+  width: 150px;
+  font-size: 1rem;
+}
+
+.character,
+.character * {
+  pointer-events: none;
+}
